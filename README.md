@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/zipmark/rspec_api_documentation.svg?branch=master)](https://travis-ci.org/zipmark/rspec_api_documentation)
-[![Dependency Status](https://gemnasium.com/badges/github.com/zipmark/rspec_api_documentation.svg)](https://gemnasium.com/github.com/zipmark/rspec_api_documentation)
 [![Code Climate](https://codeclimate.com/github/zipmark/rspec_api_documentation/badges/gpa.svg)](https://codeclimate.com/github/zipmark/rspec_api_documentation)
 [![Inline docs](https://inch-ci.org/github/zipmark/rspec_api_documentation.svg?branch=master)](https://inch-ci.org/github/zipmark/rspec_api_documentation)
 [![Gem Version](https://badge.fury.io/rb/rspec_api_documentation.svg)](https://badge.fury.io/rb/rspec_api_documentation)
@@ -185,6 +184,7 @@ RspecApiDocumentation.configure do |config|
   config.configurations_dir = Rails.root.join("doc", "configurations", "api")
 
   # Output folder
+  # **WARNING*** All contents of the configured directory will be cleared, use a dedicated directory.
   config.docs_dir = Rails.root.join("doc", "api")
 
   # An array of output format(s).
@@ -238,6 +238,7 @@ RspecApiDocumentation.configure do |config|
   config.define_group :public do |config|
     # By default the group's doc_dir is a subfolder under the parent group, based
     # on the group's name.
+    # **WARNING*** All contents of the configured directory will be cleared, use a dedicated directory.
     config.docs_dir = Rails.root.join("doc", "api", "public")
 
     # Change the filter to only include :public examples
@@ -250,7 +251,8 @@ RspecApiDocumentation.configure do |config|
 
   # Change how the response body is formatted by default
   # Is proc that will be called with the response_content_type & response_body
-  # by default response_content_type of `application/json` are pretty formated.
+  # by default, a response body that is likely to be binary is replaced with the string
+  # "[binary data]" regardless of the media type.  Otherwise, a response_content_type of `application/json` is pretty formatted.
   config.response_body_formatter = Proc.new { |response_content_type, response_body| response_body }
 
   # Change the embedded style for HTML output. This file will not be processed by
